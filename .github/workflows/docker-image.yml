@@ -15,7 +15,7 @@ jobs:
       PAT: ${{ secrets.GITHUB_TOKEN }}
       USER: chandakanant
       REGISTRY: ghcr.io
-      TAG: jenkins
+      TAG: jenkins-multi-arch
 
     steps:
       - name: Checkout repository
