@@ -1,0 +1,36 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      USER: chandakanant
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Setup Docker buildx
+        uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
+        
+      - name: Docker Setup QEMU
+        uses: docker/setup-qemu-action@v2.1.0
+        
+      - name: Build the Docker image
+        run: docker buildx build . --file Dockerfile --tag jenkins:multiarch --platform linux/amd64,linux/arm64
+        
+#       - name: Login to gHCR
+#         run: |
+#           echo $PAT | docker login ghcr.io -u ${{ env.USER }} --password-stdin
+#           docker tag jenkins:multiarch ghcr.io/${{ env.USER }}/jenkins:multiarch
+#           docker push ghcr.io/$USER/jenkins:multiarch
+        
+        
