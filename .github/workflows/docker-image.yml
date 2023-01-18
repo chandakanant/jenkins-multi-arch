@@ -27,7 +27,7 @@ jobs:
         uses: docker/setup-qemu-action@v2.1.0
         
       - name: Build the Docker image
-        run: docker buildx build . --file Dockerfile --tag jenkins --platform linux/amd64,linux/arm64
+        run: docker buildx build -t jenkins --platform linux/amd64,linux/arm64 .
         
       - name: Login to gHCR
         run: |
