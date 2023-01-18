@@ -32,7 +32,7 @@ jobs:
       - name: Login to gHCR
         run: |
           echo $PAT | docker login ${{ env.REGISTRY }} -u ${{ env.USER }} --password-stdin
-          docker tag jenkins:multiarch ${{ env.REGISTRY }}/${{ env.USER }}/jenkins
-          docker push ${{ env.REGISTRY }}/${{ env.USER }}/jenkins
+          docker tag jenkins ${{ env.REGISTRY }}/${{ env.USER }}/jenkins:multiarch
+          docker push ${{ env.REGISTRY }}/${{ env.USER }}/jenkins:multiarch
         
         
