@@ -25,14 +25,17 @@ jobs:
         
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v2.1.0
-        
-      - name: Build the Docker image
-        run: docker buildx build -t jenkins --platform linux/amd64,linux/arm64 .
-        
+      
       - name: Login to gHCR
-        run: |
-          echo $PAT | docker login ${{ env.REGISTRY }} -u ${{ env.USER }} --password-stdin
-          docker tag jenkins:latest ${{ env.REGISTRY }}/${{ env.USER }}/jenkins:multiarch
-          docker push ${{ env.REGISTRY }}/${{ env.USER }}/jenkins:multiarch
+        run: echo $PAT | docker login ${{ env.REGISTRY }} -u ${{ env.USER }} --password-stdin
+          
+      - name: Build the Docker image
+        run: docker buildx build -t jenkins --platform linux/amd64,linux/arm64 --push .
+        
+#       - name: Login to gHCR
+#         run: |
+#           echo $PAT | docker login ${{ env.REGISTRY }} -u ${{ env.USER }} --password-stdin
+#           docker tag jenkins:latest ${{ env.REGISTRY }}/${{ env.USER }}/jenkins:multiarch
+#           docker push ${{ env.REGISTRY }}/${{ env.USER }}/jenkins:multiarch
         
         
