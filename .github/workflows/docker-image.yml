@@ -45,8 +45,8 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/chandakanant/jenkins:latest
-          cache-from: type=registry,ref=t145/jenkins
-          cache-to: type=registry,ref=t145/jenkins
+          cache-from: type=registry,ref=ghcr.io/chandakanant/jenkins:buildcache
+          cache-to: type=registry,ref=ghcr.io/chandakanant/jenkins:buildcache,mode=max
           
 #       - name: Login to gHCR
 #         run: |
