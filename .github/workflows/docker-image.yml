@@ -28,10 +28,10 @@ jobs:
       - name: Build the Docker image
         run: docker buildx build . --file Dockerfile --tag jenkins:multiarch --platform linux/amd64,linux/arm64
         
-#       - name: Login to gHCR
-#         run: |
-#           echo $PAT | docker login ghcr.io -u ${{ env.USER }} --password-stdin
-#           docker tag jenkins:multiarch ghcr.io/${{ env.USER }}/jenkins:multiarch
-#           docker push ghcr.io/$USER/jenkins:multiarch
+      - name: Login to gHCR
+        run: |
+          echo $PAT | docker login ghcr.io -u ${{ env.USER }} --password-stdin
+          docker tag jenkins:multiarch ghcr.io/${{ env.USER }}/jenkins:multiarch
+          docker push ghcr.io/$USER/jenkins:multiarch
         
         
